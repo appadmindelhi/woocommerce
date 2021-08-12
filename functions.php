@@ -57,6 +57,24 @@ function digics_display_variation_sku( $variation_data, $product, $variation ) {
 
     return $variation_data;
 }
+         
+/*“Secure payments” image @ Checkout Page
+* replace logo_image_url with your payment gateway logo
+*/
+
+add_action( 'woocommerce_proceed_to_checkout', 'digics_trust_place_order' );
+function digics_trust_place_order() {
+    echo '<img src="logo_image_url" style="margin: 1em auto">';
+}
+
+
+/* Upsell @ Thank-you Page */
+
+add_action( 'woocommerce_thankyou', 'digics_thankyou_upsell', 5 ); 
+function digics_thankyou_upsell() {
+	echo '<h2>Customers also bought...</h2>';
+	echo do_shortcode( '[products limit="3" columns="3" orderby="popularity" on_sale="true" ]' );
+}
 
 
 
